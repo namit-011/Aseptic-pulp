@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \":*)",
+      "Bash(node -e \"require\\(''canvas''\\)\")",
+      "Bash(node -e \"require\\(''pngjs''\\)\")",
+      "Bash(node -e \"require\\(''jimp''\\)\")",
+      "Bash(npm install play-dl)"
+    ]
+  }
+}
