@@ -1,0 +1,37 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Hostinger via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.PULP_FTP_SERVER }}
+          username: ${{ secrets.PULP_FTP_USERNAME }}
+          password: ${{ secrets.PULP_FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./
+          server-dir: ./
+          # This FTP account is already scoped directly to the Pulp docroot
+          # (confirmed by hand: logging in lands right at index.html/app.js),
+          # unlike the main site's account which needed a nested server-dir.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            **/package.json
+            **/package-lock.json
+            **/yt-dlp.exe
+          # First run uploads everything; every run after only uploads what
+          # actually changed, so routine content-only pushes stay fast.
+          state-name: .ftp-deploy-sync-state.json
