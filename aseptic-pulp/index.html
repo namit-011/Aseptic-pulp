@@ -1006,6 +1006,25 @@
     ]
   }
   </script>
+
+  <!-- uploadDate deliberately omitted - not knowing it isn't worth guessing
+       for structured data; Google treats a wrong date as worse than a
+       missing one. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "How We Make 100% Preservative-Free Fruit Pulp — Aseptic Processing Explained",
+    "description": "InnoFarms' aseptic processing units in action, converting farm-fresh fruit into shelf-stable, preservative-free pulp at the source.",
+    "thumbnailUrl": "https://pulp.innofarms.co.in/Images/aseptic-unit.png",
+    "contentUrl": "https://pulp.innofarms.co.in/video.mp4",
+    "publisher": {
+      "@type": "Organization",
+      "name": "InnoFarms",
+      "sameAs": "https://www.youtube.com/@innofarms1622"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -1709,6 +1728,8 @@
             <video
               class="vcm-local-video"
               src="video.mp4"
+              poster="Images/aseptic-unit.png"
+              title="How We Make 100% Preservative-Free Fruit Pulp — Aseptic Processing Explained"
               autoplay
               muted
               loop
