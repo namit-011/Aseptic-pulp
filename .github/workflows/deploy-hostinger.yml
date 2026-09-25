@@ -3,6 +3,10 @@ name: Deploy to Hostinger
 on:
   push:
     branches: [main]
+    # This repo holds multiple unrelated projects (pulp-marketplace, a stale
+    # root-level duplicate of this same site, etc.) - only redeploy when the
+    # actual site folder changes, not on every unrelated commit to the repo.
+    paths: ["aseptic-pulp/**"]
   workflow_dispatch: {}
 
 jobs:
@@ -19,7 +23,7 @@ jobs:
           username: ${{ secrets.PULP_FTP_USERNAME }}
           password: ${{ secrets.PULP_FTP_PASSWORD }}
           protocol: ftps
-          local-dir: ./
+          local-dir: ./aseptic-pulp/
           server-dir: ./
           # This FTP account is already scoped directly to the Pulp docroot
           # (confirmed by hand: logging in lands right at index.html/app.js),
